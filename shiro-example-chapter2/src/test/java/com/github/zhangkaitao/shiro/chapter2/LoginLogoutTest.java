@@ -42,9 +42,11 @@ public class LoginLogoutTest {
 		Subject subject = SecurityUtils.getSubject();
 		UsernamePasswordToken token = new UsernamePasswordToken("tiger", "333");
 
-		System.out.println("用户名=" + token.getUsername());
-		System.out.println("用户密码=" + Arrays.toString(token.getPassword()));
-
+		System.out.println(" === getUsername === " + token.getUsername());
+		System.out.println(" === getPrincipal === " + token.getPrincipal());
+		System.out.println(" === getPassword === " + new String(token.getPassword()));
+		System.out.println(" === getCredentials === " + new String((char[])token.getCredentials()));
+		
 		try {
 			// 4、登录，即身份验证
 			subject.login(token);
@@ -81,6 +83,7 @@ public class LoginLogoutTest {
 		try {
 			// 4、登录，即身份验证
 			subject.login(token);
+			System.out.println("登录成功！");
 		} catch (AuthenticationException e) {
 			// 5、身份验证失败
 			e.printStackTrace();
@@ -105,7 +108,8 @@ public class LoginLogoutTest {
 		// 3、得到Subject及创建用户名/密码身份验证Token（即用户身份/凭证）
 		Subject subject = SecurityUtils.getSubject();
 		UsernamePasswordToken token = new UsernamePasswordToken("wang", "123");
-
+		System.out.println("用户名=" + token.getUsername());
+		System.out.println("用户密码=" + Arrays.toString(token.getPassword()));
 		try {
 			// 4、登录，即身份验证
 			subject.login(token);
@@ -137,6 +141,7 @@ public class LoginLogoutTest {
 		try {
 			// 4、登录，即身份验证
 			subject.login(token);
+			System.out.println("登录成功！");
 		} catch (AuthenticationException e) {
 			// 5、身份验证失败
 			e.printStackTrace();
