@@ -1,22 +1,28 @@
 package com.github.zhangkaitao.shiro.chapter5.hash;
 
-import junit.framework.Assert;
+import java.security.Key;
+import java.util.Arrays;
+
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.codec.CodecSupport;
 import org.apache.shiro.codec.Hex;
-import org.apache.shiro.crypto.*;
-import org.apache.shiro.crypto.hash.*;
+import org.apache.shiro.crypto.AesCipherService;
+import org.apache.shiro.crypto.BlowfishCipherService;
+import org.apache.shiro.crypto.DefaultBlockCipherService;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
+import org.apache.shiro.crypto.hash.DefaultHashService;
+import org.apache.shiro.crypto.hash.HashRequest;
+import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.crypto.hash.Sha1Hash;
+import org.apache.shiro.crypto.hash.Sha256Hash;
+import org.apache.shiro.crypto.hash.Sha384Hash;
+import org.apache.shiro.crypto.hash.Sha512Hash;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.apache.shiro.util.SimpleByteSource;
 import org.junit.Test;
 
-import javax.crypto.Cipher;
-import java.security.*;
-import java.security.interfaces.RSAPrivateKey;
-import java.security.spec.EncodedKeySpec;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.RSAPrivateKeySpec;
-import java.security.spec.X509EncodedKeySpec;
+import junit.framework.Assert;
 
 /**
  * <p>User: Zhang Kaitao
@@ -32,6 +38,8 @@ public class CodecAndCryptoTest {
         String str = "hello";
         String base64Encoded = Base64.encodeToString(str.getBytes());
         String str2 = Base64.decodeToString(base64Encoded);
+        System.out.println(base64Encoded);
+        System.out.println(Base64.encodeToString(base64Encoded.getBytes()));
         Assert.assertEquals(str, str2);
 
     }
@@ -41,6 +49,7 @@ public class CodecAndCryptoTest {
         String str = "hello";
         String base64Encoded = Hex.encodeToString(str.getBytes());
         String str2 = new String(Hex.decode(base64Encoded.getBytes()));
+        System.out.println(base64Encoded);
         Assert.assertEquals(str, str2);
 
     }
@@ -50,6 +59,7 @@ public class CodecAndCryptoTest {
         String str = "hello";
         byte[] bytes = CodecSupport.toBytes(str, "utf-8");
         String str2 = CodecSupport.toString(bytes, "utf-8");
+        System.out.println(Arrays.toString(bytes));
         Assert.assertEquals(str, str2);
     }
 

@@ -1,22 +1,16 @@
 package com.github.zhangkaitao.shiro.chapter2;
 
-import com.alibaba.druid.pool.DruidDataSource;
-import junit.framework.Assert;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.Authenticator;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.config.IniFactorySupport;
 import org.apache.shiro.config.IniSecurityManagerFactory;
-import org.apache.shiro.realm.Realm;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.Factory;
 import org.apache.shiro.util.ThreadContext;
 import org.junit.After;
 import org.junit.Test;
 
-import java.sql.Connection;
-import java.util.Arrays;
+import junit.framework.Assert;
 
 /**
  * <p>
@@ -40,13 +34,14 @@ public class LoginLogoutTest {
 
 		// 3、得到Subject及创建用户名/密码身份验证Token（即用户身份/凭证）
 		Subject subject = SecurityUtils.getSubject();
-		UsernamePasswordToken token = new UsernamePasswordToken("tiger", "333");
+		UsernamePasswordToken token = new UsernamePasswordToken("tiger", "123");
 
 		System.out.println(" === getUsername === " + token.getUsername());
-		System.out.println(" === getPrincipal === " + token.getPrincipal());
 		System.out.println(" === getPassword === " + new String(token.getPassword()));
-		System.out.println(" === getCredentials === " + new String((char[])token.getCredentials()));
-		
+
+		System.out.println(" === getPrincipal === " + token.getPrincipal());
+		System.out.println(" === getCredentials === " + new String((char[]) token.getCredentials()));
+
 		try {
 			// 4、登录，即身份验证
 			subject.login(token);
@@ -75,17 +70,18 @@ public class LoginLogoutTest {
 
 		// 3、得到Subject及创建用户名/密码身份验证Token（即用户身份/凭证）
 		Subject subject = SecurityUtils.getSubject();
-		UsernamePasswordToken token = new UsernamePasswordToken("zhang", "123");
-		
-		System.out.println("用户名=" + token.getUsername());
-		System.out.println("用户密码=" + Arrays.toString(token.getPassword()));
-		
+		UsernamePasswordToken token = new UsernamePasswordToken("tiger", "123");
+
+		System.out.println(" === getUsername === " + token.getUsername());
+		System.out.println(" === getPassword === " + new String(token.getPassword()));
+
 		try {
 			// 4、登录，即身份验证
 			subject.login(token);
 			System.out.println("登录成功！");
 		} catch (AuthenticationException e) {
 			// 5、身份验证失败
+			System.out.println("登录失败！");
 			e.printStackTrace();
 		}
 
@@ -107,14 +103,18 @@ public class LoginLogoutTest {
 
 		// 3、得到Subject及创建用户名/密码身份验证Token（即用户身份/凭证）
 		Subject subject = SecurityUtils.getSubject();
-		UsernamePasswordToken token = new UsernamePasswordToken("wang", "123");
-		System.out.println("用户名=" + token.getUsername());
-		System.out.println("用户密码=" + Arrays.toString(token.getPassword()));
+		UsernamePasswordToken token = new UsernamePasswordToken("zhang", "123");
+
+		System.out.println(" === getUsername === " + token.getUsername());
+		System.out.println(" === getPassword === " + new String(token.getPassword()));
+
 		try {
 			// 4、登录，即身份验证
 			subject.login(token);
+			System.out.println("登录成功！");
 		} catch (AuthenticationException e) {
 			// 5、身份验证失败
+			System.out.println("登录失败！");
 			e.printStackTrace();
 		}
 
@@ -136,7 +136,10 @@ public class LoginLogoutTest {
 
 		// 3、得到Subject及创建用户名/密码身份验证Token（即用户身份/凭证）
 		Subject subject = SecurityUtils.getSubject();
-		UsernamePasswordToken token = new UsernamePasswordToken("zhang", "123");
+		UsernamePasswordToken token = new UsernamePasswordToken("tiger", "1231");
+
+		System.out.println(" === getUsername === " + token.getUsername());
+		System.out.println(" === getPassword === " + new String(token.getPassword()));
 
 		try {
 			// 4、登录，即身份验证
@@ -144,6 +147,7 @@ public class LoginLogoutTest {
 			System.out.println("登录成功！");
 		} catch (AuthenticationException e) {
 			// 5、身份验证失败
+			System.out.println("登录失败！");
 			e.printStackTrace();
 		}
 

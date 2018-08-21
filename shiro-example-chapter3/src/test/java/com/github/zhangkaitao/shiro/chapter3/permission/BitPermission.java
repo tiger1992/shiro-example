@@ -1,8 +1,8 @@
 package com.github.zhangkaitao.shiro.chapter3.permission;
 
-import com.alibaba.druid.util.StringUtils;
-import junit.framework.Assert;
 import org.apache.shiro.authz.Permission;
+
+import com.alibaba.druid.util.StringUtils;
 
 /**
  *  规则
@@ -56,7 +56,6 @@ public class BitPermission implements Permission {
 
     }
 
-    @Override
     public boolean implies(Permission p) {
         if(!(p instanceof BitPermission)) {
             return false;
